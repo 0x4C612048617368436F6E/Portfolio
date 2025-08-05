@@ -17,14 +17,15 @@ try {
 }
 terminal.loadAddon(fitAddon);
 terminal.open(document.getElementById("terminal"));
+terminal.focus();
 fitAddon.fit(); // Resize the terminal to fit the container
 //event listener for window resize
 //document.addEventListener();
 //fetch data from server and based on number, render that
 //immeddiately call
-(() => {
+/*(() => {
   fetch(serverURL).then(() => {});
-})();
+})();*/
 
 terminal.writeln("");
 //map over data
@@ -58,7 +59,40 @@ data.map((value) => {
   }
 });
 
+//%grn -> index 8
 terminal.writeln(`
+${customMetasploitAnsiEscapemapper[8]["%grn"]}
  ┌──(h4x0r㉿lahashcon)-[~/projects]
 `);
 terminal.write(` └─$ `);
+
+//only enable inputs after all of that
+let InputBuffer = [];
+
+const customStringCreator = (array) => {
+  let returnString = "";
+  console.log(array);
+  for (let i = 0; i < array.lenght; i++) {
+    returnString.concat(array[i]);
+  }
+  console.log(returnString);
+  return returnString;
+};
+
+terminal.onData((key) => {
+  if (key.charCodeAt(0) === 13) {
+    terminal.writeln(InputBuffer.toString());
+    terminal.writeln(`
+${customMetasploitAnsiEscapemapper[8]["%grn"]}
+ ┌──(h4x0r㉿lahashcon)-[~/projects]
+`);
+    terminal.write(` └─$ `);
+    //clear input Buffer
+  } else {
+    InputBuffer.push(key);
+    console.log("String value: ", customStringCreator(InputBuffer));
+    terminal.write(
+      `${customMetasploitAnsiEscapemapper[2]["%whi"]} InputBuffer.toString()`
+    );
+  }
+});

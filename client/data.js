@@ -61,14 +61,14 @@ export const logoFile = [
 
 export const customMetasploitAnsiEscapemapper = [
   { "%clr": "" }, //probably clear
-  { "%whi": "" }, //probably white
+  { "%whi": "e[0;37m" }, //probably white
   { "%yel": "" }, //probably yellow
   { "%red": "" }, //probably red
   { "%bld": "" }, //probably bold
   { "%blu": "" }, //probably blue
   { "%mag": "" }, //not sure
   { "%dred": "" }, //not sure
-  { "%grn": "" }, //probably green
+  { "%grn": "\u001b[32m" }, //probably green
   { "%cya": "" }, //not sure
   { "%blk": "" }, //probably black
 ];
